@@ -1,0 +1,50 @@
+{
+    "manifest_version":3,
+    "name": "slater",
+    "version": "1.0",
+    "icons": {
+        "16":"bee.png",
+        "48":"bee.png",
+        "128":"bee.png"
+    },
+    
+    "action": {
+        "default_icon":{
+            "16":"bee.png",
+            "48":"bee.png",
+            "128":"bee.png"
+        },
+        "default_popup":"popup.html"
+    },
+    
+    "content_scripts": [
+        {
+            "matches":["<all_urls>"],
+            "js":["contentScript.js"],
+            "run-at":"document_idle"
+        }
+    ],
+    "host_permissions":["*://*/*"],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'",
+        "sandbox": ["script-src 'self'", "object-src 'self'"],
+        "web_accessible_resources": ["script-src 'self'", "object-src 'self'", "connect-src ws://localhost"]
+    },
+
+    
+    "background":{
+        "service_worker":"background.js",
+        "scripts": ["background.js"]
+    },
+    "permissions":[
+        "activeTab",
+        "contextMenus",
+        "scripting",
+        "webRequest",
+        "webRequestBlocking",
+        "webNavigation",
+        "storage",  
+        "tabs"
+    ]
+}
+
